@@ -1,6 +1,5 @@
 const Header = (props) => {
-  const { cartItems } = props;
-  let username = localStorage.getItem("username");
+  const { cartItems, username, isLoggedIn } = props;
 
   return (
     <nav className="navbar bg-light">
@@ -18,8 +17,8 @@ const Header = (props) => {
             Cart{" "}
             <span className="badge text-bg-secondary">{cartItems.length}</span>
           </button>
-          { username === null &&  (<button className="btn btn-success ms-2">Login</button>)}
-          { username !== null &&  (<button className="btn btn-success ms-2">Hello {username}</button>)}
+          { !isLoggedIn &&  (<button className="btn btn-success ms-2">Login</button>)}
+          { isLoggedIn &&  (<button className="btn btn-success ms-2">Hello {username}</button>)}
         </div>
       </div>
     </nav>
