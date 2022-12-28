@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import ProductList from "../components/ProductList";
 import CartList from "../components/CartList";
-import products from "./../data/products";
+import productList from "./../data/products";
 import users from "./../data/users";
 import Pagination from "../components/Pagination";
 import LoginForm from "../components/LoginForm";
@@ -15,7 +15,9 @@ const Homepage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const [products, setProducts] = useState([]);
 
   const handleLogin = () => {
     let isOk = false;
@@ -31,6 +33,35 @@ const Homepage = () => {
       alert("username, password is incorrect");
     }
   };
+  
+  useEffect( () => {
+
+    // async function getProduct() {
+    //   const response = await fetch("https://63ac465834c46cd7ae7cca9f.mockapi.io/products");
+    //   const responseJSON = await response.json();
+    //   setProducts(responseJSON);
+    // }
+    // getProduct();
+    // lấy dữ liệu về từ backend. chạy 1 lần duy nhất.
+    setProducts(productList)
+  },[])
+
+
+  useEffect( () => {
+    const searchTimeout = setTimeout( () => {
+      // to update product list
+      
+      const newValue = productList.filter( item => item.name.includes(searchValue))
+      setProducts(newValue);
+    }, 1000)
+    return () => {
+      clearTimeout(searchTimeout);
+    }
+  }, [searchValue])
+
+
+
+
 
   const handleAddItem = (p) => {
     setCartItems((prev) => {

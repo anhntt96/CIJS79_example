@@ -1,13 +1,9 @@
 import ProductItem from "./ProductItem";
 
 const ProductList = (props) => {
-  const { products, handleAddItem, searchValue } = props;
+  const { products, handleAddItem } = props;
 
-  const productsList = products
-    .filter((item) => {
-      return item.name.toLowerCase().includes(searchValue.toLowerCase());
-    })
-    .map((pItem) => {
+  const productsList =  products?.map((pItem) => {
       return <ProductItem key={pItem.id} product={pItem} handleAddItem={handleAddItem} />;
     });
 

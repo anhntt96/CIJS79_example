@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const products = [
+const productList = [
     {
         id: uuidv4(),
         name:"iPhone 14 Plus 128GB",
@@ -39,4 +39,4 @@ const products = [
     }   
 ]
 
-export default products;
+export default productList;
